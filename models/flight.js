@@ -5,9 +5,25 @@ var Schema = mongoose.Schema;
 // TODO: set validations and defaults 
 var flightSchema = new Schema({
     // note that an OBJECT is passed in to Schema as an argument
-    airline: String,
-    flightNo: Number,
-    departs: Date
+    airline: {
+        type: String,
+        enum: ["American", "Southwest", "United"]
+    },
+    // flightNo: Number is functionally the same as below;
+    // the reason for assinging an OBJECT (instead of assinging a type
+    // directly), is so that we can set a DEFAULT value
+    flightNo: {
+        type: Number,
+        min: 10,
+        max: 9999
+    },
+    departs: {type: Date, function(){
+        new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+        // answer taken from here: https://stackoverflow.com/questions/8609261/how-to-determine-one-year-from-now-in-javascript
+    }}
+}, {
+    timestamps: true
+    // every document will have a "created/updted at: (time)" timestamp
 });
 
 module.exports = mongoose.model("Flight", flightSchema);
