@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mongoose Flights</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <h2>Enter a New Flight</h2>
+    <form action="/flights" method="POST">
+        <!-- remember, action= specifies WHERE(i.e. what path) we want to POST to -->
+        <label>
+            Airline:
+            <input type="text" name="airline">
+        </label><br>
+        <label>
+            Flight Number:
+            <input type="number" name="flightNo">
+        </label><br>
+        <label>
+            Date:
+            <input type="datetime-local" name="departs">
+        </label><br>
+        <input type="submit" value="Add Flight">
+    </form>
+</body>
+</html>
