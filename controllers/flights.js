@@ -1,4 +1,6 @@
 var Flight = require("../models/flight");
+var moment = require("moment");
+// moment.js is a date library; read more here: http://momentjs.com/docs/
 
 module.exports = {
     index,
@@ -14,7 +16,7 @@ function index(req, res){
         // saying that we want ALL flights; then we have a callback function
         // that has an error first signature, and then a parameter name of flights
         // (which will be our handle on the array of flights that find() returns)
-        res.render("flights/index", {title: "All Flights", flights});
+        res.render("flights/index", {title: "All Flights", flights, moment});
         // again, we pass in a RELATIVE path from the VIEWS directory as the first arg
         // the second arg is the CONTEXT object
         /**

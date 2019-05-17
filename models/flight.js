@@ -41,6 +41,9 @@ var flightSchema = new Schema({
         default: "SEA"
     },
     destinations: [destinationSchema]
+    // just to be explicit, this is where we EMBED the subdoc (desintationSchema); note that 
+    // the property destinations will be an ARRAY; this will be important for the 
+    // desintations CONTROLLER (we'll be PUSHing in a new destination)
 }, {
     timestamps: true
     // every document will have a "created/updted at: (time)" timestamp

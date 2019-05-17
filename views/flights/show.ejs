@@ -3,6 +3,8 @@
     <div>Airline: <%= flight.airline%></div>
     <div>Flight Number: <%= flight.flightNo%></div>
     <div>Departure: <%= flight.departs%></div>
+    <!-- here, we COULD choose to format the Date object with moment.js, but i think it makes more
+    sense to leave it verbose (including hhmmss), since we ARE on the DETAILS page after all -->
     <div>Airport: <%= flight.airport%></div>
 </section>
 

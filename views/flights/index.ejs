@@ -6,6 +6,8 @@
             <th>Airline</th>
             <th>Flight Number</th>
             <th>Departure</th>
+            <th>Airport</th>
+            <th>Flight Details</th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +20,9 @@
         <tr>
             <td><%= f.airline %></td>
             <td><%= f.flightNo %></td>
-            <td><%= f.departs %></td>
+            <td><%= moment(f.departs).format("dddd, MMMM Do YYYY") %></td>
+            <!-- you can read more on the above line here: http://momentjs.com/docs/#/displaying/ -->
+            <td><%= f.airport%></td>
             <td><a href="/flights/<%= f._id%>">DETAILS</a></td>
             <!-- note that our flights handle is an ARRAY of Flight objects. recall that we can
             get the SPECIFIC object id in Mongoose with "._id"; and also, just to make sure you're

@@ -11,6 +11,16 @@ nav {
   background-color: rgb(202, 202, 202);
 }
 
+table {
+  border: 3px solid black;
+  margin: 20px auto;
+}
+
+th, td {
+  border: 2px solid black;
+  padding: 5px;
+  text-align: center;
+}
 /* 
 TODO:
 - i want a banner? (just text will do; maybe italicized) that'll span across the
