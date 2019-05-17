@@ -1,38 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("../partials/header") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mongoose Flights</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
-
-<body>
-    <nav>
-        <a href="/">HOME</a>
-        <a href="/flights/new">ADD FLIGHT</a>
-    </nav>
-    <h2>All Flights</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Airline</th>
-                <th>Flight Number</th>
-                <th>Departure</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% flights.forEach(function(f){ %>
-            <tr>
-                <td><%= f.airline %></td>
-                <td><%= f.flightNo %></td>
-                <td><%= f.departs %></td>
-            </tr>
-            <% });%>
-        </tbody>
-    </table>
-</body>
-
-</html>
+<table>
+    <thead>
+        <tr>
+            <th>Airline</th>
+            <th>Flight Number</th>
+            <th>Departure</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% flights.forEach(function(f){ %>
+            <!-- remember, in our flights controller, we pass in a flight object in the .index()
+            function. that's what allows us access (and thus be able to call a forEach); fyi, 
+            flights is an array that is returned from calling the .find({}) on Flight; and in our
+            case, since we didn't specify any parameters, we get an array of ALL flight, which is
+            what we want for an INDEX  -->
+        <tr>
+            <td><%= f.airline %></td>
+            <td><%= f.flightNo %></td>
+            <td><%= f.departs %></td>
+            <td><a href="/flights/<%= f._id%>">DETAILS</a></td>
+            <!-- note that our flights handle is an ARRAY of Flight objects. recall that we can
+            get the SPECIFIC object id in Mongoose with "._id"; and also, just to make sure you're
+            understanding the flow, remember that <a> is a LINK, so when the user clicks on it,
+            they are requesting to access a page on the server with an address specified in the 
+            href (which in this case would slap /flights/f._id behind localhost:3000); AGAIN,
+            that f._id is the id of the SPEICIF flight that the user clicked. and because this 
+            DETAILS button is generated in the forEach, it's created with the same "f" handle
+            that the <td> elements above are accessing for the other properties -->
+        </tr>
+        <% });%>
+    </tbody>
+</table>
+<%- include("../partials/footer") %>

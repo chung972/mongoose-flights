@@ -2,29 +2,47 @@ var Flight = require("../models/flight");
 
 module.exports = {
     index,
+    show,
     new: newFlight,
     create
 }
 
 function index(req, res){
+    // Query the database to gather ALL resources, b/c this is an INDEX
     Flight.find({}, function(err, flights){
         // passing in an EMPTY query OBJECT (the first argument), we are
         // saying that we want ALL flights; then we have a callback function
         // that has an error first signature, and then a parameter name of flights
         // (which will be our handle on the array of flights that find() returns)
-        res.render("flights/index", {flights});
+        res.render("flights/index", {title: "All Flights", flights});
+        // again, we pass in a RELATIVE path from the VIEWS directory as the first arg
+        // the second arg is the CONTEXT object
         /**
          * remember, {flights} is the same as: 
          * res.render("flights/index", {
          *  flights: flights
          * }
          */
+    }).sort("departs");
+    // so APPARENTLY, to have ASCENDING order, you just leave the key in string; no plus sign
+    // but if you want DESCENDING order, you do have to append a "-" in front of the key
+}
+
+function show(req, res){
+    Flight.findById(req.params.id, function(err, flight){
+        res.render("flights/show", {title: "Flight Details", flight});
+        // things might get funky here because we are NOT passing in a title
+        // like we are with index or newFlight; not sure how the header partial
+        // will interpret the title; actually, what happens if we DON'T define (or
+        // rather, pass in) a title property, we will get an error. HOWEVER, if we 
+        // DO define a title, then that's what will be shown in the header partial
+        // (idk how but) it ignores(?) the ternary operators for "Add/All Flight/s"
     });
 }
 
 function newFlight(req, res){
     // respond with a form for enter new flights
-    res.render("flights/new");
+    res.render("flights/new", {title: "Add Flight"});
 }
 
 function create(req, res){
@@ -35,9 +53,12 @@ function create(req, res){
         // note how we have to use SQUARE BRACKET notation here
         if(req.body[key] === "") delete req.body[key];
     }
+
+    // below is the CONSTRUCTOR syntax; older javascript
     var flight = new Flight(req.body);
     // the line above is the point where Mongoose would step in and applies any
     // default values
+
     flight.save(function(err){
         // one way to handle errors in express
         if(err) return res.render("flights/new");
@@ -46,4 +67,10 @@ function create(req, res){
         console.log(flight);
         res.redirect("/flights");
     });
+
+    // below is a NEWER syntax
+    // Flight.create(req.body, function(err, flight){
+    //     console.log(flight)
+    //     res.redirect("/flights");
+    // });
 }

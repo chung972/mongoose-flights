@@ -2,7 +2,16 @@ var mongoose = require("mongoose");
 // optional SHORTCUT variable below
 var Schema = mongoose.Schema;
 
-// TODO: set validations and defaults 
+var destinationSchema = new Schema({
+    airport: {
+        type: String,
+        enum: ["AUS", "DAL", "LAX", "SEA"]
+    },
+    arrival: Date
+}, {
+    timestamps: true
+});
+
 var flightSchema = new Schema({
     // note that an OBJECT is passed in to Schema as an argument
     airline: {
@@ -17,17 +26,28 @@ var flightSchema = new Schema({
         min: 10,
         max: 9999
     },
-    departs: {type: Date, function(){
-        new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-        // answer taken from here: https://stackoverflow.com/questions/8609261/how-to-determine-one-year-from-now-in-javascript
-    }}
+    departs: {
+        type: Date,
+        function() {
+            new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+            // answer taken from here: https://stackoverflow.com/questions/8609261/how-to-determine-one-year-from-now-in-javascript
+            // Daniel had this for the date:
+            // return new Date().getFullYear() + 1;
+        }
+    },
+    airport: {
+        type: String,
+        enum: ["AUS", "DAL", "LAX", "SEA"],
+        default: "SEA"
+    },
+    destinations: [destinationSchema]
 }, {
     timestamps: true
     // every document will have a "created/updted at: (time)" timestamp
 });
 
 module.exports = mongoose.model("Flight", flightSchema);
-// we invoke .model() to compile the Schema defined above and spit out a 
+// we invoke .model() to compile the Schema defined above and spit out a
 // model named "Flight";
 // when we start creating data using our MODEL, the COLLECTION inside the
 // database will be called "movies"; by convention, is just the pluralized,

@@ -1,0 +1,45 @@
+<%- include("../partials/header") %>
+<section>
+    <div>Airline: <%= flight.airline%></div>
+    <div>Flight Number: <%= flight.flightNo%></div>
+    <div>Departure: <%= flight.departs%></div>
+    <div>Airport: <%= flight.airport%></div>
+</section>
+
+<br><br>
+<h2>Add Destination</h2>
+<form action="/flights/<%= flight._id%>/destinations" method="POST">
+    <!-- we handle this action in the destinations.js router -->
+    <label>Destination:</label>
+    <select name="airport">
+        <option value="AUS">AUS</option>
+        <option value="DAL">DAL</option>
+        <option value="LAX">LAX</option>
+        <option value="SEA">SEA</option>
+    </select>
+    <label>Arrival Date:</label>
+    <input type="datetime-local" name="departs">
+    <input type="submit" value="Add Destination">
+</form>
+
+<% if(flight.destinations.length) {%>
+    <table>
+        <thead>
+            <tr>
+                <th>Destination</th>
+                <th>Arrival Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% flight.desintations.forEach(d => { %>
+                <tr>
+                    <td><%= d.airport%></td>
+                    <td><%= d.arrival%></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else {%>
+    <h4>No Destinations Yet</h4>
+<% }%>
+<%- include("../partials/footer") %>
