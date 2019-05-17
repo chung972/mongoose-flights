@@ -1,11 +1,26 @@
 <%- include("../partials/header") %>
 <section>
-    <div>Airline: <%= flight.airline%></div>
-    <div>Flight Number: <%= flight.flightNo%></div>
-    <div>Departure: <%= flight.departs%></div>
-    <!-- here, we COULD choose to format the Date object with moment.js, but i think it makes more
-    sense to leave it verbose (including hhmmss), since we ARE on the DETAILS page after all -->
-    <div>Airport: <%= flight.airport%></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Airline:</th>
+                <th>Flight Number:</th>
+                <th>Departure:</th>
+                <th>Airport:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Airline: <%= flight.airline%></td>
+                <td>Flight Number: <%= flight.flightNo%></td>
+                <td>Departure: <%= flight.departs%></td>
+                <!-- here, we COULD choose to format the Date object with moment.js, but i think it makes more
+                    sense to leave it verbose (including hhmmss), since we ARE on the DETAILS page after all -->
+                <td>Airport: <%= flight.airport%></td>
+            </tr>
+        </tbody>
+    </table>
+
 </section>
 
 <br><br>
@@ -18,30 +33,30 @@
         <option value="DAL">DAL</option>
         <option value="LAX">LAX</option>
         <option value="SEA">SEA</option>
-    </select>
+    </select><br>
     <label>Arrival Date:</label>
-    <input type="datetime-local" name="departs">
+    <input type="datetime-local" name="departs"><br>
     <input type="submit" value="Add Destination">
 </form>
 
 <% if(flight.destinations.length) {%>
-    <table>
-        <thead>
-            <tr>
-                <th>Destination</th>
-                <th>Arrival Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% flight.desintations.forEach(d => { %>
-                <tr>
-                    <td><%= d.airport%></td>
-                    <td><%= d.arrival%></td>
-                </tr>
-            <% }); %>
-        </tbody>
-    </table>
+<table>
+    <thead>
+        <tr>
+            <th>Destination</th>
+            <th>Arrival Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% flight.destinations.forEach(d => { %>
+        <tr>
+            <td><%= d.airport%></td>
+            <td><%= d.arrival%></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
 <% } else {%>
-    <h4>No Destinations Yet</h4>
+<h4>No Destinations Yet</h4>
 <% }%>
 <%- include("../partials/footer") %>
