@@ -10,6 +10,7 @@ require("./config/database");
 var indexRouter = require('./routes/index');
 var flightsRouter = require('./routes/flights');
 var destsRouter = require("./routes/destinations");
+var tickRouter = require("./routes/tickets");
 
 var app = express();
 
@@ -25,8 +26,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/flights', flightsRouter);
-app.use("/", destsRouter);
 // this just means that all FLIGHT-RELATED routes will start with /flights
+app.use("/", destsRouter);
+app.use("/", tickRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
