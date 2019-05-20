@@ -32,6 +32,13 @@ function index(req, res){
 
 function show(req, res){
     Flight.findById(req.params.id, function(err, flight){
+    // Flight.find({req.params.id: {$nin: req.body.destinations}}, function(err, flight)){
+        
+        // Flight.find({"Flight.destinations": {$nin: flight.destinations}}, function(err, destinations){
+        //     // is this right?
+        // });
+
+
         res.render("flights/show", {title: "Flight Details", flight});
         // things might get funky here because we are NOT passing in a title
         // like we are with index or newFlight; not sure how the header partial
@@ -41,6 +48,7 @@ function show(req, res){
         // (idk how but) it ignores(?) the ternary operators for "Add/All Flight/s"
     });
 }
+
 
 function newFlight(req, res){
     // respond with a form for enter new flights
