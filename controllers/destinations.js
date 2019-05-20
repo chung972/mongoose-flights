@@ -19,6 +19,9 @@ function create(req,res){
             // we need to use .SAVE() here and NOT!!! .create(); remember, that 
             // "destinations" is EMBEDDED within the Flight model; we do not save the
             // embedded data entities, rather, we save the MODEL that they belong to 
+            for(let key in req.body){
+                if(req.body[key] === "") delete req.body[key];
+            }
             res.redirect(`/flights/${flight._id}`);
         });
     });
