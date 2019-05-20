@@ -61,4 +61,28 @@
 <% } else {%>
 <h4>No Destinations Yet</h4>
 <% }%>
+
+<% if(flight.destinations.length) {%>
+    <table>
+        <thead>
+            <tr>
+                <th>Seat</th>
+                <th>Price</th>
+                <th>Flight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% flight.destinations.forEach(d => { %>
+            <tr>
+                <td><%= d.airport%></td>
+                <td><%= d.arrival%></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% } else {%>
+    <h4>No Destinations Yet</h4>
+    <% }%>
+
+
 <%- include("../partials/footer") %>
