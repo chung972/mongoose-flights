@@ -9,14 +9,15 @@ var destinationSchema = new Schema({
     },
     arrival: {
         type: Date,
-        default: function() {
+        default: function () {
             let date = new Date().setFullYear(new Date().getFullYear() + 1);
             return date;
+            // TODO: for some reason, the defaul date for arrival is not working
         }
     }
 }, {
-    timestamps: true
-});
+        timestamps: true
+    });
 
 var flightSchema = new Schema({
     // note that an OBJECT is passed in to Schema as an argument
@@ -34,10 +35,12 @@ var flightSchema = new Schema({
     },
     departs: {
         type: Date,
-        default: function() {
+        default: function () {
             let date = new Date().setFullYear(new Date().getFullYear() + 1);
             return date;
-            
+            // NOTE! an artifact of setting the default to jump forward a year from the current date is that you
+            // get an offset in the days, esp for leap years
+
             // new Date(new Date().setFullYear(new Date().getFullYear() + 1));
             // answer taken from here: https://stackoverflow.com/questions/8609261/how-to-determine-one-year-from-now-in-javascript
         }
@@ -52,9 +55,9 @@ var flightSchema = new Schema({
     // the property destinations will be an ARRAY; this will be important for the 
     // desintations CONTROLLER (we'll be PUSHing in a new destination)
 }, {
-    timestamps: true
-    // every document will have a "created/updted at: (time)" timestamp
-});
+        timestamps: true
+        // every document will have a "created/updted at: (time)" timestamp
+    });
 
 module.exports = mongoose.model("Flight", flightSchema);
 // we invoke .model() to compile the Schema defined above and spit out a
