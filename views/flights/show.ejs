@@ -62,27 +62,33 @@
 <h4>No Destinations Yet</h4>
 <% }%>
 
-<% if(flight.destinations.length) {%>
+<p>
+    <a href="/flights/<%= flight._id%>/tickets/new">New Ticket</a>
+</p>
+
+<% if(tickets.length) {%>
     <table>
         <thead>
             <tr>
                 <th>Seat</th>
-                <th>Price</th>
+                <th>Price ($)</th>
                 <th>Flight</th>
             </tr>
         </thead>
         <tbody>
-            <% flight.destinations.forEach(d => { %>
+            <% tickets.forEach(t => { %>
             <tr>
-                <td><%= d.airport%></td>
-                <td><%= d.arrival%></td>
+                <td><%= t.seat%></td>
+                <td><%= t.price%></td>
+                <td><%= t.flight%></td>
             </tr>
             <% }); %>
         </tbody>
     </table>
     <% } else {%>
-    <h4>No Destinations Yet</h4>
+    <h4>No Tickets Yet</h4>
     <% }%>
+
 
 
 <%- include("../partials/footer") %>
