@@ -24,9 +24,17 @@
 </section>
 
 <br><br>
-<h2>Add Destination</h2>
+<h2>Add New Destination for Flight No. <%= flight.flightNo%></h2>
 <form action="/flights/<%= flight._id%>/destinations" method="POST">
-    <!-- we handle this action in the destinations.js router -->
+    <!-- we handle this action in the destinations.js router
+    https://gist.github.com/jim-clark/d7e5c9130c9b46b253d4c47aa601596a ;
+    note that this RESTful route is just creating a "comment" for a "post"; this
+    is because we have the form ON the SAME page, so we don't need to be redirecting
+    to a "new.ejs" template; typically, when we DO have a "/new" at the end of an
+    action or url, that implies that we are going to another location; also note that
+    the verbs for these two actions (i.e. "/flights/<%= flight._id%>/destinations" 
+    vs "/flights/<%= flight._id%>/destinations/new") are DIFFERENT. we need "POST" for
+    the FORMER, and "GET" for the LATTER; you can see the routes in the link above-->
     <label>Destination:</label>
     <select name="airport">
         <option value="AUS">AUS</option>
@@ -64,6 +72,7 @@
 
 <p>
     <a href="/flights/<%= flight._id%>/tickets/new">New Ticket</a>
+
 </p>
 
 <% if(tickets.length) {%>
