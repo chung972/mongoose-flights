@@ -1,5 +1,6 @@
 <%- include('../partials/header') %>
 
+<h2>Add New Destination for Flight No. <%= flight.flightNo%></h2>
 <form action="/tickets" method="POST">
     <label>Seat:
         <input name="seat" required pattern="[A-F][1-9]\d?">
