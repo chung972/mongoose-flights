@@ -10,7 +10,7 @@ require("./config/database");
 var indexRouter = require('./routes/index');
 var flightsRouter = require('./routes/flights');
 var destsRouter = require("./routes/destinations");
-var ticketRouter = require("./routes/tickets");
+var ticketsRouter = require("./routes/tickets");
 
 var app = express();
 
@@ -28,7 +28,9 @@ app.use('/', indexRouter);
 app.use('/flights', flightsRouter);
 // this just means that all FLIGHT-RELATED routes will start with /flights
 app.use("/", destsRouter);
-app.use("/", ticketRouter);
+app.use("/", ticketsRouter);
+// again, we need the FLEXIBILITY for ticketsRouter (because one of the RESTful routes)
+// begins with "/flights" (which !== "/tickets")
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
