@@ -29,7 +29,8 @@ var flightSchema = new Schema({
     departs: {
         type: Date,
         function() {
-            new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+            let date = new Date().setFullYear(new Date().getFullYear() + 1);
+            return date;
             // answer taken from here: https://stackoverflow.com/questions/8609261/how-to-determine-one-year-from-now-in-javascript
             // Daniel had this for the date:
             // return new Date().getFullYear() + 1;
