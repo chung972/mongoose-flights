@@ -14,6 +14,7 @@ const ticketSchema = new Schema({
         type: Schema.Types.ObjectId,
         // type: ObjectId,
         ref: "Flight"
+        // TODO: in the real world, ONE ticket can have MANY connnecting flights, so wrap flight: [{}]
     }
 }, {
     timestamps: true
