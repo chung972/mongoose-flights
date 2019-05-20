@@ -12,6 +12,7 @@ const ticketSchema = new Schema({
     },
     flight: {
         type: Schema.Types.ObjectId,
+        // type: ObjectId,
         ref: "Flight"
     }
 }, {
