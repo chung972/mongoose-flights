@@ -7,7 +7,13 @@ var destinationSchema = new Schema({
         type: String,
         enum: ["AUS", "DAL", "LAX", "SEA"]
     },
-    arrival: Date
+    arrival: {
+        type: Date,
+        default: function() {
+            let date = new Date().setFullYear(new Date().getFullYear() + 1);
+            return date;
+        }
+    }
 }, {
     timestamps: true
 });
