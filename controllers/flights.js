@@ -38,7 +38,6 @@ function show(req, res){
         //     // is this right?
         // });
 
-
         res.render("flights/show", {title: "Flight Details", flight});
         // things might get funky here because we are NOT passing in a title
         // like we are with index or newFlight; not sure how the header partial
