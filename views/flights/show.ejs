@@ -72,19 +72,18 @@
 
 <p>
     <a href="/flights/<%= flight._id%>/tickets/new">New Ticket</a>
-
 </p>
 
-<% if(tickets.length) {%>
-    <table>
-        <thead>
-            <tr>
-                <th>Seat</th>
-                <th>Price ($)</th>
-                <th>Flight</th>
-            </tr>
-        </thead>
-        <tbody>
+<table>
+    <thead>
+        <tr>
+            <th>Seat</th>
+            <th>Price ($)</th>
+            <th>Flight</th>
+        </tr>
+    </thead>
+    <tbody>
+            <% if(tickets.length) {%>
             <% tickets.forEach(t => { %>
             <tr>
                 <td><%= t.seat%></td>
