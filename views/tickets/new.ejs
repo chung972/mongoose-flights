@@ -1,17 +1,20 @@
 <%- include('../partials/header') %>
 
 <h2>Add New Ticket for Flight No. <%= flight.flightNo%></h2>
-<form action="/tickets" method="POST">
+<!-- <form action="/tickets" method="POST"> -->
+<form action="/flights/<%= flight._id%>/tickets" method="POST" autocomplete="off">
     <label>Seat:
-        <input name="seat" required pattern="[A-F][1-9]\d?">
+        <input type="text" name="seat" required pattern="[A-F][1-9]\d?">
+        <!-- only in JAVASCRIPT do we need to use escapes "/"; don't need it in HTML -->
     </label><br>
     <label>Price:
         <input type="number" name="price">
     </label><br>
-    <label>Flight:
+    <!-- <label>Flight:
         <input name="flight" value="<%= flight._id%>" readonly>
-    </label><br>
-    <input type="submit" value="Purchase Ticket">
+    </label><br> 
+    the above label (and its contents therein) are an example of UN-RESTful routing -->
+    <input type="submit" value="Add Ticket">
 </form>
 
 <%- include('../partials/footer') %>
