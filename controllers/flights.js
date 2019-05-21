@@ -34,6 +34,7 @@ function index(req, res) {
 function show(req, res) {
     Flight.findById(req.params.id, function (err, flight) {
         // Flight.find({req.params.id: {$nin: req.body.destinations}}, function(err, flight)){
+        // TODO: test code for a bonus in lab 2
 
         Ticket.find({ flight: flight._id }, function (err, tickets) {
             res.render("flights/show", { title: "Flight Details", flight, tickets });
@@ -72,7 +73,14 @@ function create(req, res) {
         if (err) return res.render("flights/new");
         // remember that TEMPLATES are automatically assumed to be relative to
         // the views folder
-        console.log(flight);
+
+        for(let key in req.body){
+            if(req.body[key] === "") delete req.body[key];
+        }
+        // what the for..let block above does is go through the entire list of keys
+        // in the body and check for any with a (strict) value of an empty string ("");
+        // if we DO find such a key, then delete that key from the body; this code block
+        // is primarily targetting the "departs" property (which is type: Date)
         res.redirect("/flights");
     });
 
