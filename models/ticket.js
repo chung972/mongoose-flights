@@ -12,9 +12,10 @@ const ticketSchema = new Schema({
     },
     flight: {
         type: Schema.Types.ObjectId,
-        // type: ObjectId,
         ref: "Flight"
         // TODO: in the real world, ONE ticket can have MANY connnecting flights, so wrap flight: [{}]
+        // actually, Daniel says, if we wanted to keep track of all the tickets, we would want to add
+        // a TICKETS array in the FLIGHT model
     }
 }, {
     timestamps: true
