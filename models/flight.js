@@ -9,11 +9,6 @@ var destinationSchema = new Schema({
     },
     arrival: {
         type: Date,
-        default: function () {
-            let date = new Date().setFullYear(new Date().getFullYear() + 1);
-            return date;
-            // TODO: for some reason, the defaul date for arrival is not working
-        }
     }
 }, {
         timestamps: true
@@ -36,8 +31,8 @@ var flightSchema = new Schema({
     departs: {
         type: Date,
         default: function () {
-            let date = new Date().setFullYear(new Date().getFullYear() + 1);
-            return date;
+            let today = new Date();
+            return new Date().setFullYear(today.getFullYear() + 1);
             // NOTE! an artifact of setting the default to jump forward a year from the current date is that you
             // get an offset in the days, esp for leap years
 
